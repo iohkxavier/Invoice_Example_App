@@ -1,17 +1,22 @@
-//InvoiceCollection = new Mongo.Collection("invoices");
-/*Template.Invoices.helpers({
-	invoices: ()=> {
-		return Invoices.find({});
-	}
-});
-*/
+var defaultsort = {sort : {createdAt:1,total:1}};
+Session.set('sortInvoices', defaultsort);
+var defaultFilter = {};
+Session.set('filterInvoices', defaultFilter);
 
+
+//returns data for template
 Template.Invoices.helpers({
-    invoices: [
-      { invoiceNumber: "1","total":"1" , "createdAt":"2016-02-12"},
-      { invoiceNumber: "2","total":"2", "createdAt":"2016-02-12"},
-      { invoiceNumber: "3", "total":"3", "createdAt":"2016-02-12"}
-    ]
+   	invoices: ()=> {
+   			cur = Invoices.find(Session.get('filterInvoices'),Session.get('sortInvoices'));
+            console.log(cur.count());
+   		// }
+		return cur;
+	}
   });
 
-
+function GoSubscribe()
+{
+   console.log("I subscribe");
+  Meteor.subscribe('invoices',Session.get('filterInvoices'),Session.get('sortInvoices'));
+}
+GoSubscribe();
