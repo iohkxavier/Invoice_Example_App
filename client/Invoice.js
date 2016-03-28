@@ -8,15 +8,11 @@ Session.set('filterInvoices', defaultFilter);
 Template.Invoices.helpers({
    	invoices: ()=> {
    			cur = Invoices.find(Session.get('filterInvoices'),Session.get('sortInvoices'));
-            console.log(cur.count());
-   		// }
+            //console.log(cur.count());
 		return cur;
 	}
   });
 
-function GoSubscribe()
-{
-   console.log("I subscribe");
-  Meteor.subscribe('invoices',Session.get('filterInvoices'),Session.get('sortInvoices'));
-}
-GoSubscribe();
+Template.Invoices.onCreated(function () {
+  this.subscribe('invoices');
+});

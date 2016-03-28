@@ -1,3 +1,3 @@
-Meteor.publish("invoices", function (filterParam,sortParam) {
-  return Invoices.find(filterParam,sortParam); 
+Meteor.publish("invoices", function () {
+  return Invoices.find(); 
 });
