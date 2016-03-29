@@ -14,11 +14,12 @@ Template.Week.events({
 
 Template.Month.events({
   'click button': function () {
-  	//Session.set('invoiceTimeRange','month');
+  	Session.set('invoiceTimeRange','month');
+    Router.go("/"+Session.get("invoiceTimeRange")+"?sortedBy="+Session.get("invoiceSortBy")+"&sortOrder="+Session.get("invoiceSortOrder"));
   }});
 
 Template.All.events({
   'click button': function () {
-
-   //Session.set('invoiceTimeRange','all');
+    Session.set('invoiceTimeRange','all');
+    Router.go("/"+Session.get("invoiceTimeRange")+"?sortedBy="+Session.get("invoiceSortBy")+"&sortOrder="+Session.get("invoiceSortOrder"));
   }});

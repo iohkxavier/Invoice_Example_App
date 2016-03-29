@@ -26,3 +26,26 @@ Router.route('/week', {
     return Invoices.byTimeRange("week", this.params.query.sortedBy,this.params.query.sortOrder);
   }
 });
+
+Router.route('/month', {
+    waitOn: function () {
+    //console.log("subscribe week");
+    return Meteor.subscribe("invoices","month",this.params.query.sortedBy, this.params.query.sortOrder);
+  },
+  template: 'Invoices',
+  data: function() {
+    return Invoices.byTimeRange("month", this.params.query.sortedBy,this.params.query.sortOrder);
+  }
+});
+
+
+Router.route('/all', {
+    waitOn: function () {
+    //console.log("subscribe week");
+    return Meteor.subscribe("invoices","all",this.params.query.sortedBy, this.params.query.sortOrder);
+  },
+  template: 'Invoices',
+  data: function() {
+    return Invoices.byTimeRange("all", this.params.query.sortedBy,this.params.query.sortOrder);
+  }
+});

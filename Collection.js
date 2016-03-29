@@ -10,7 +10,6 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder){
   {
   		sortOrder = -1;
   }
-  console.log(sortOrder);
   sortQuery[sortBy] = sortOrder;
 
   let endDate = new Date();
