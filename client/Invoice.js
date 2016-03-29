@@ -1,22 +1,12 @@
-//by default, load all invoices by creation date order by asc
-Session.set('invoiceSortOrder', 1);
+//session values by default
+Session.set('invoiceSortOrder', 'asc');
 Session.set('invoiceSortBy', 'createdAt');
-Session.set('invoiceTimeRange', 'all');
-
+Session.set('invoiceTimeRange', 'today');
 
 //returns data for template
 Template.Invoices.helpers({
     invoices: () => {
-       return Invoices.byTimeRange(Session.get('invoiceTimeRange'), Session.get('invoiceSortBy'), Session.get('invoiceSortOrder'));
+     //console.log("helpers");
+     return Template.instance().data; //fetch data from router
    }
-});
-
-Template.Invoices.onCreated(function () {
-var self = this;
-self.autorun(function() {//autorun() => rerun everytime Session values change
-   self.subscribe('invoices', 
-      Session.get('invoiceTimeRange'), 
-      Session.get('invoiceSortBy'), 
-      Session.get('invoiceSortOrder'));
-  });
 });
