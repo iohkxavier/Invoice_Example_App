@@ -12,8 +12,9 @@ Template.Invoices.helpers({
 });
 
 Template.Invoices.onCreated(function () {
-this.autorun(function() {//autorun() => rerun everytime Session values change
-   this.subscribe('invoices', 
+var self = this;
+self.autorun(function() {//autorun() => rerun everytime Session values change
+   self.subscribe('invoices', 
       Session.get('invoiceTimeRange'), 
       Session.get('invoiceSortBy'), 
       Session.get('invoiceSortOrder'));
