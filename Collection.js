@@ -1,8 +1,15 @@
 Invoices = new Mongo.Collection('invoices');
 
-
 Invoices.byTimeRange = function(filter, sortBy, sortOrder){
   let sortQuery = {};
+  if (sortOrder == "asc")
+  {
+  		sortOrder = 1;
+  }
+  else if (sortOrder == "desc")
+  {
+  		sortOrder = -1;
+  }
   sortQuery[sortBy] = sortOrder;
 
   let endDate = new Date();
@@ -27,3 +34,5 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder){
     {sort: sortQuery}
   );
 };
+
+

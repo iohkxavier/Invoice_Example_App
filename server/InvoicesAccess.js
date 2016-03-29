@@ -1,4 +1,5 @@
- var generateInvoices = function(){
+Meteor.methods({
+'generateInvoices': function(){
     
   var arr = [];
   for (var i = 0; i < 200; i++) {
@@ -19,4 +20,5 @@
     addInvoice(invNumber,total,generateDate);
     Invoices.insert({ invoiceNumber: invNumber,total: total, createdAt:generateDate});
   }
-  };
+  }
+});
