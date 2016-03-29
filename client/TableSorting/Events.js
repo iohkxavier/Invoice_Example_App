@@ -1,28 +1,16 @@
 //Events: click on Time button filter invoices
 Template.bTotal.events({
   'click button': function () {
-   SetSortParam("total");
+    Session.set('invoiceSortBy', 'total');
+    Session.set('invoiceSortOrder',Session.get('invoiceSortOrder')*(-1));
   }});
 
 Template.bCreatedAt.events({
   'click button': function () {
-     SetSortParam("createdAt");
-   
+     Session.set('invoiceSortBy', 'createdAt');
+   Session.set('invoiceSortOrder',Session.get('invoiceSortOrder')*(-1));
   }});
 
- function SetSortParam(name){
-  var sortParam = Session.get("sortInvoices");
-  var oldValue = sortParam.sort[name];
-  var newValue =1;
-  if (oldValue)
-  {
-    newValue = sortParam.sort[name] * (-1);
-  }
-   var tab = {};
-   tab[""+name] = newValue;
-  
-  sortParam.sort = tab;
-  Session.set("sortInvoices",sortParam);
- }
+ 
 
 
