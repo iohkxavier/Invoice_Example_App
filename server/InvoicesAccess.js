@@ -10,7 +10,7 @@ Meteor.methods({
     var generateDate = new Date(today.getFullYear(),(today.getMonth()),day);
     //unique invoice number
     invNumber = Math.floor(Math.random()*20000+1);
-
+    
     while(arr.indexOf(invNumber) !== -1)
     {
       invNumber = Math.floor(Math.random()*20000+1);
