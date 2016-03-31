@@ -11,5 +11,6 @@ Template.bCreatedAt.events({
 
 function GoURL(sortedBy) {
   let sortOrder = FlowRouter.getQueryParam('sortOrder') === "asc" ? "desc" : "asc";
+  FlowRouter.setQueryParams({sortedBy: sortedBy});
   FlowRouter.setQueryParams({sortOrder: sortOrder});
 }
