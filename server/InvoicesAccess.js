@@ -1,9 +1,8 @@
 Meteor.methods({
 'generateInvoices': function(){
-    
+
   var arr = [];
   for (var i = 0; i < 200; i++) {
-
     var total = Math.floor((Math.random() * 1000) + 1);
     var day = Math.floor(Math.random() * 30) + 1;
     var today = new Date();
