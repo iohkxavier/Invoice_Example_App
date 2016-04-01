@@ -1,29 +1,37 @@
 Invoices = new Mongo.Collection('invoices');
 
-
-Invoices.byTimeRange = function(filter, sortBy, sortOrder){
+Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
   let sortQuery = {};
+  if (sortOrder === "asc")
+  {
+    sortOrder = 1;
+  }
+  else if (sortOrder === "desc")
+  {
+    sortOrder = -1;
+  }
   sortQuery[sortBy] = sortOrder;
 
-  let endDate = new Date();
+  let curDate = new Date();
   let startDate = new Date();
   switch (filter) {
     default:
     case "today":
-      startDate.setDate(endDate.getDate()-1);
+      startDate.setDate(curDate.getDate()-1);
       break;
     case "week":
-      startDate.setDate(endDate.getDate()-7);
+      startDate.setDate(curDate.getDate()-7);
       break;
     case "month":
-      startDate.setMonth(endDate.getMonth()-1);
+      startDate.setMonth(curDate.getMonth()-1);
       break;
     case "all":
-      return Invoices.find({}, {sort: sortQuery});
+      return Invoices.find({}, {sort: sortQuery,limit:limit});
       break;
   }
   return Invoices.find(
-    {createdAt: {$gt: startDate,$lte: endDate}},
-    {sort: sortQuery}
+    {createdAt: {$gte: startDate}},
+    { sort: sortQuery,limit:limit }
   );
 };
+
