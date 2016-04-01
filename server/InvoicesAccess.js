@@ -16,7 +16,6 @@ Meteor.methods({
     }
     arr[i] = invNumber;
        
-    addInvoice(invNumber,total,generateDate);
     Invoices.insert({ invoiceNumber: invNumber,total: total, createdAt:generateDate});
   }
   }
