@@ -36,8 +36,7 @@ function showMoreVisible() {
         { 
         if (!target.data("visible")) {
             target.data("visible", true);
-            Session.set("invoicesLimit",
-                Session.get("invoicesLimit") + LIMIT_INVOICES);
+            Session.set("invoicesLimit", Session.get("invoicesLimit") + LIMIT_INVOICES);
         }
     } else {
         if (target.data("visible")) {
