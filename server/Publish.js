@@ -1,3 +1,3 @@
-Meteor.publish("invoices", function (filter,sortBy,sortOrder) {
-  return Invoices.byTimeRange (filter,sortBy,sortOrder);
+Meteor.publish("invoices", function (filter,sortBy,sortOrder,limit) {
+  return Invoices.byTimeRange (filter,sortBy,sortOrder,limit);
 });

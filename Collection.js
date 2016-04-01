@@ -1,14 +1,14 @@
 Invoices = new Mongo.Collection('invoices');
 
-Invoices.byTimeRange = function(filter, sortBy, sortOrder){
+Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
   let sortQuery = {};
   if (sortOrder === "asc")
   {
-  		sortOrder = 1;
+    sortOrder = 1;
   }
   else if (sortOrder === "desc")
   {
-  		sortOrder = -1;
+    sortOrder = -1;
   }
   sortQuery[sortBy] = sortOrder;
 
@@ -26,13 +26,12 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder){
       startDate.setMonth(curDate.getMonth()-1);
       break;
     case "all":
-      return Invoices.find({}, {sort: sortQuery});
+      return Invoices.find({}, {sort: sortQuery,limit:limit});
       break;
   }
   return Invoices.find(
     {createdAt: {$gte: startDate}},
-    {sort: sortQuery}
+    { sort: sortQuery,limit:limit }
   );
 };
-
 
