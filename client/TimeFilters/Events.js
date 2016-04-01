@@ -1,22 +1,24 @@
 //Events: click on Time button filter invoices
 Template.Today.events({
   'click button': function () {
-  	Session.set('invoiceTimeRange','today');
+    goURL("today");
   }});
 
 Template.Week.events({
   'click button': function () {
-  	var d = new Date();
-  	Session.set('invoiceTimeRange','week');
+    goURL("week");
   }});
 
 Template.Month.events({
   'click button': function () {
-  	var d = new Date();
-  	Session.set('invoiceTimeRange','month');
+    goURL("month");
   }});
 
 Template.All.events({
   'click button': function () {
-   Session.set('invoiceTimeRange','all');
+   goURL("all");
   }});
+
+function goURL(timeRange) {
+  FlowRouter.setParams({timeRange: timeRange});
+}
