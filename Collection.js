@@ -13,20 +13,19 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
   sortQuery[sortBy] = sortOrder;
 
   let endDate = moment();
-  let startDate = new Date();
-  let daywrapper = moment(startDate);
+  let startDate = moment();
   switch (filter) {
     default:
     case "today":
-     daywrapper.startOf('day');
+     startDate.startOf('day');
      endDate.endOf('day');
       break;
     case "week":
-      daywrapper.startOf('isoweek');
+      startDate.startOf('isoweek');
       endDate.endOf('isoweek');
       break;
     case "month":
-      daywrapper.startOf('month');
+      startDate.startOf('month');
       endDate.endOf('month');
       break;
     case "all":
@@ -35,7 +34,7 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
       break;
   }
   return Invoices.find(
-    {createdAt: {$gte: daywrapper.toDate(),$lte:  endDate.toDate()}},
+    {createdAt: {$gte: startDate.toDate(),$lte: endDate.toDate()}},
     {sort: sortQuery,limit:limit}
   );
 };
