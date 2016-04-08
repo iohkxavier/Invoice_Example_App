@@ -18,17 +18,16 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
   switch (filter) {
     default:
     case "today":
-     daywrapper.startOf('day'); 
+     daywrapper.startOf('day');
       break;
     case "week":
-      daywrapper.startOf('week');
-      daywrapper.add(1, 'days');//begin on mondays
+      daywrapper.startOf('isoweek');
       break;
     case "month":
-      daywrapper.startOf('month'); 
+      daywrapper.startOf('month');
       break;
     case "all":
-      return Invoices.find({}, 
+      return Invoices.find({},
         {sort: sortQuery,limit:limit});
       break;
   }
@@ -37,4 +36,3 @@ Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
     {sort: sortQuery,limit:limit}
   );
 };
-
