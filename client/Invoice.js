@@ -1,34 +1,37 @@
-//returns data for template
-const LIMIT_INVOICES = 40
-Session.set("invoicesLimit",LIMIT_INVOICES);
-
 Template.Invoices.onCreated(function() {
+  this.incrementInvoicesNumber = 30;
+  this.initInvoicesNumber = 30;
+  this.elementsLimit = new ReactiveVar();
+  this.elementsLimit.set(this.initInvoicesNumber);
    var self = this;
    self.autorun(function() {
       self.subscribe('invoices',
          FlowRouter.getParam("timeRange"),
          FlowRouter.getQueryParam('sortedBy'),
          FlowRouter.getQueryParam('sortOrder'),
-         Session.get("invoicesLimit")
+         self.elementsLimit.get()
          );
    });
 });
 
 Template.Invoices.helpers({
+  elementsLimit : function() {
+    return Template.instance().elementsLimit.get();
+  },
    invoices: () => {
       return Invoices.byTimeRange(
          FlowRouter.getParam("timeRange"),
          FlowRouter.getQueryParam('sortedBy'),
          FlowRouter.getQueryParam('sortOrder'),
-         Session.get("invoicesLimit")
+         this.Template.instance().elementsLimit.get()
       )},
    hasMoreInvoices: () => {
-      return Invoices.find().count() >= Session.get("invoicesLimit");
+      return Invoices.find().count() >= this.Template.instance().elementsLimit.get();
   }
 });
 
 Template.Invoices.events({
   'becameVisible .showMoreResults': function (event, template) {
-      Session.set("invoicesLimit", Session.get("invoicesLimit") + LIMIT_INVOICES);
+      template.elementsLimit.set(template.elementsLimit.get() + template.incrementInvoicesNumber);
     }
 })
