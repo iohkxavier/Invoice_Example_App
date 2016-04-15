@@ -3,20 +3,19 @@
   <ul>
   <table>
   <tr><td>{{> bInvoiceNumber}}</td><td>{{> bTotal}}</td><td>{{>bCreatedAt}}</td></tr>
+  {{#infinitescroll moreContentAvailable=hasMoreInvoices}}
     {{#each invoices}}
       {{> Invoice}}
+    {{else}}
+      <tr>
+        <td>Nothing to load</td>
+      </tr>
     {{/each}}
+  {{/infinitescroll}}
     </table>
   </ul>
-
-{{#if hasMoreInvoices}}
-    <div id="showMoreResults" style="margin-left: 25px;">
-        <span class="loading">Loading...</span>
-    </div>
-{{/if}}
 </template>
 
 <template name="Invoice">
   <tr><td>{{invoiceNumber}}</td><td>{{total}}</td><td>{{formatTime createdAt}}</td></tr>
 </template>
-
