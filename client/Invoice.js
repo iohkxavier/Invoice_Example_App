@@ -25,7 +25,7 @@ Template.Invoices.helpers({
          FlowRouter.getQueryParam('sortOrder'),
          this.Template.instance().elementsLimit.get()
       )},
-   hasMoreInvoices: () => {
+   hasMoreContent: () => {
       return Invoices.find().count() >= this.Template.instance().elementsLimit.get();
   }
 });
