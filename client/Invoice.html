@@ -1,22 +1,27 @@
 <template name="Invoices">
   <h2>Invoices</h2>
-  <ul>
   <table>
-  <tr><td>{{> bInvoiceNumber}}</td><td>{{> bTotal}}</td><td>{{>bCreatedAt}}</td></tr>
-    {{#each invoices}}
-      {{> Invoice}}
-    {{/each}}
-    </table>
-  </ul>
-
-{{#if hasMoreInvoices}}
-    <div id="showMoreResults" style="margin-left: 25px;">
-        <span class="loading">Loading...</span>
-    </div>
-{{/if}}
+    <tr>
+      <td>{{>bInvoiceNumber}}</td>
+      <td>{{>bTotal}}</td>
+      <td>{{>bCreatedAt}}</td>
+    </tr>
+    {{#infinitescroll moreContentAvailable=hasMoreContent}}
+      {{#each invoices}}
+        {{> invoice_template}}
+      {{else}}
+        <tr>
+          <td>Nothing to load</td>
+        </tr>
+      {{/each}}
+    {{/infinitescroll}}
+  </table>
 </template>
 
-<template name="Invoice">
-  <tr><td>{{invoiceNumber}}</td><td>{{total}}</td><td>{{formatTime createdAt}}</td></tr>
+<template name="invoice_template" >
+  <tr>
+    <td>{{invoiceNumber}}</td>
+    <td>{{total}}</td>
+    <td>{{formatTime createdAt}}</td>
+  </tr>
 </template>
-
