@@ -26,7 +26,7 @@ Template.Invoices.helpers({
          this.Template.instance().elementsLimit.get()
       )},
    hasMoreContent: () => {
-      return Invoices.find().count() >= this.Template.instance().elementsLimit.get();
+     return ReactiveMethod.call('hasMoreInvoicesThan', this.Template.instance().elementsLimit.get(),FlowRouter.getParam("timeRange"));
   }
 });
 

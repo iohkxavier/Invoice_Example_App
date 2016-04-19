@@ -6,7 +6,7 @@
       <td>{{>bTotal}}</td>
       <td>{{>bCreatedAt}}</td>
     </tr>
-    {{#infinitescroll moreContentAvailable=hasMoreContent}}
+    {{#infinitescroll timeDelay=200 visibility=hasMoreContent}}
       {{#each invoices}}
         {{> invoice_template}}
       {{else}}
