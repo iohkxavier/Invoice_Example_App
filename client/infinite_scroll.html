@@ -1,4 +1,8 @@
 <template name="infinitescroll">
   {{> Template.contentBlock}}
-  {{> more_results_indicator timeDelay=200 visibility=moreContentAvailable}}
+  {{#if visibility}}
+    <div class="showMoreResults" style="margin-left: 25px;">
+      <span class="loading">Loading...</span>
+    </div>
+  {{/if}}
 </template>

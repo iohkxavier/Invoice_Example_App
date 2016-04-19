@@ -1,4 +1,4 @@
-Template.more_results_indicator.onCreated(function() {
+Template.infinitescroll.onCreated(function() {
    this.showMoreVisible = function() {
      var target = $(".showMoreResults");
       if (!target.length) return;
@@ -9,10 +9,10 @@ Template.more_results_indicator.onCreated(function() {
      };
 });
 
-Template.more_results_indicator.onRendered(function() {
+Template.infinitescroll.onRendered(function() {
   $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
 });
 
-Template.more_results_indicator.onDestroyed(function() {
+Template.infinitescroll.onDestroyed(function() {
     $(window).off('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
 });
