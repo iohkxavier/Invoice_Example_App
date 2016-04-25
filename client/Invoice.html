@@ -1,5 +1,6 @@
 <template name="invoices_template">
   <h2>Invoices</h2>
+  {{>search_box eventName="enteredSearchQuery" criteria=searchFields}}
   <table>
     <tr>
       <td>{{>invoice_number}}</td>

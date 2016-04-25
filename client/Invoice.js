@@ -25,11 +25,20 @@ TemplateController('invoices_template', {
        )},
     hasMoreContent: () => {
       return ReactiveMethod.call('hasMoreInvoicesThan', this.Template.instance().state.elementsLimit());
+    },
+    searchFields: () => {
+      return [
+                {"name":"email","value":"","format":"string"},
+                {"name":"invoiceNumber","value":"","format":"integer"},
+                {"name":"total","value":"","format":"integer"}
+             ];
     }
   },
   events: {
   'becameVisible .showMoreResults': function (event, template) {
       this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
-    }
+    },
+  'enteredSearchQuery .form-group input': function (event, template, invoiceFieldsArray) {
+  }
   }
 });
