@@ -3,6 +3,7 @@
   <table>
     <tr>
       <td>{{>invoice_number}}</td>
+      <td>{{>email}}</td>
       <td>{{>total}}</td>
       <td>{{>created_at}}</td>
     </tr>
@@ -21,6 +22,7 @@
 <template name="invoice_template" >
   <tr>
     <td>{{invoiceNumber}}</td>
+    <td>{{email}}</td>
     <td>{{total}}</td>
     <td>{{formatTime createdAt}}</td>
   </tr>
