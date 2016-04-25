@@ -22,6 +22,6 @@ Meteor.methods({
   },
 
   'hasMoreInvoicesThan':function(limit, filter){
-    return Invoices.find(getCreatedAtFilters(filter)).count() > limit;
+    return false;
   }
 });
