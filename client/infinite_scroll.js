@@ -1,18 +1,19 @@
-Template.infinite_scroll.onCreated(function() {
-   this.showMoreVisible = function() {
-     var target = $(".showMoreResults");
-      if (!target.length) return;
-       if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight )
-       {
-        $(".showMoreResults").trigger("becameVisible");
-       }
-     };
-});
-
-Template.infinite_scroll.onRendered(function() {
-  $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
-});
-
-Template.infinite_scroll.onDestroyed(function() {
+TemplateController('infinite_scroll', {
+  onCreated() {
+    let instance = this;
+    this.showMoreVisible = function() {
+    instance.target = $(".showMoreResults");
+    if (!instance.target.length) return;
+    if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight)
+    {
+      instance.target.trigger("becameVisible");
+    }
+    };
+  },
+  onRendered() {
+    $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
+  },
+  onDestroyed() {
     $(window).off('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
+  }
 });

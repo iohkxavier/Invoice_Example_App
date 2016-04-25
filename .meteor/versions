@@ -62,6 +62,7 @@ retry@1.0.7
 routepolicy@1.0.10
 session@1.1.5
 simple:reactive-method@1.0.2
+space:template-controller@0.2.1
 spacebars@1.0.11
 spacebars-compiler@1.0.11
 standard-minifier-css@1.0.6
