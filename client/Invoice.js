@@ -8,9 +8,7 @@ TemplateController('invoices_template', {
   onCreated() {
     this.autorun(() => {
       this.subscribe('invoices',
-        FlowRouter.getParam("timeRange"),
-        FlowRouter.getQueryParam('sortedBy'),
-        FlowRouter.getQueryParam('sortOrder'),
+        invoiceQueryState.toJSON(),
         this.state.elementsLimit()
       );
     });
@@ -18,9 +16,7 @@ TemplateController('invoices_template', {
   helpers: {
     invoices: () => {
       return Invoices.byTimeRange(
-        FlowRouter.getParam("timeRange"),
-        FlowRouter.getQueryParam('sortedBy'),
-        FlowRouter.getQueryParam('sortOrder'),
+        invoiceQueryState.toJSON(),
         this.Template.instance().state.elementsLimit()
        )},
     hasMoreContent: () => {
@@ -39,6 +35,12 @@ TemplateController('invoices_template', {
       this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
     },
   'enteredSearchQuery .form-group input': function (event, template, invoiceFieldsArray) {
+    for (var key of Object.keys(invoiceFieldsArray)) {
+      if (invoiceQueryState.get(invoiceFieldsArray[key].name) !==  invoiceFieldsArray[key].value)
+      {
+        invoiceQueryState.set(invoiceFieldsArray[key].name, invoiceFieldsArray[key].value);
+      }
+    }
   }
   }
 });

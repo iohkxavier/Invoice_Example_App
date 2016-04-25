@@ -1,29 +1,25 @@
 Invoices = new Mongo.Collection('invoices');
 
-Invoices.byTimeRange = function(filter, sortBy, sortOrder,limit){
+Invoices.byTimeRange = function(invoiceQueryState, limit){
   let sortQuery = {};
-  if (sortOrder === "asc")
-  {
-    sortOrder = 1;
-  }
-  else if (sortOrder === "desc")
-  {
-    sortOrder = -1;
-  }
-  sortQuery[sortBy] = sortOrder;
+  sortQuery[invoiceQueryState.sortedBy] = invoiceQueryState.sortOrder;
+  let createdAtFilters = getCreatedAtFilters("createdAt",invoiceQueryState.timeRange);
+  let invoiceNumberFilter = getExactIntegerMatchFilter("invoiceNumber",invoiceQueryState.invoiceNumber);
+  let emailFilter = getSearchStartOfStringFilter("email",invoiceQueryState.email);
+  let totalFilter = getExactIntegerMatchFilter("total",invoiceQueryState.total);
 
-  let createdAtFilters = getCreatedAtFilters(filter);
   return Invoices.find(
-    createdAtFilters,
-    {sort: sortQuery,limit:limit}
+    {"$and":[invoiceNumberFilter,createdAtFilters,emailFilter, totalFilter]}
+    ,
+    {sort: sortQuery, limit:limit}
   );
 };
 
-getCreatedAtFilters = function(filter){
+getCreatedAtFilters = function(param,timeRangeFilter){
   let createdAt = {};
   let endDate = moment();
   let startDate = moment();
-  switch (filter) {
+  switch (timeRangeFilter) {
     case "today":
       startDate.startOf('day');
       endDate.endOf('day');
@@ -39,6 +35,26 @@ getCreatedAtFilters = function(filter){
     case "all":
       return createdAt;
   }
-  createdAt = { "createdAt" : { "$gte": startDate.toDate(),"$lte": endDate.toDate()}};
+  createdAt[param] = { "$gte": startDate.toDate(),"$lte": endDate.toDate()};
   return createdAt;
+}
+
+getExactIntegerMatchFilter = function(param,numberValue){
+  let numberFilter = {};
+  if (numberValue)
+  {
+    numberFilter[param] = parseInt(numberValue);
+  }
+  return numberFilter;
+}
+
+getSearchStartOfStringFilter = function (param, stringValue) {
+  let stringFilter = {};
+  if (stringValue)
+  {
+    let regex = {};
+    regex["$regex"] = '^'+stringValue;
+    stringFilter[param] = regex;
+  }
+  return stringFilter;
 }

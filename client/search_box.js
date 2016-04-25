@@ -8,7 +8,8 @@ TemplateController('search_box', {
       let errMssg = "";
       switch (format) {
         case "string":
-          if (isNaN(value) )
+          if (value.length === 0 || //accept empty
+              isNaN(value) )
           {
             hasError = false;
           }
@@ -38,7 +39,7 @@ TemplateController('search_box', {
       if (!errorFormatMssg)
       {
         currentField.value = targetElement.val();
-        targetElement.trigger(this.data.eventName, [this.searchFields]);
+        targetElement.trigger(this.data.eventName, [this.data.criteria]);
       }
       else
       {
