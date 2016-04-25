@@ -1,20 +1,20 @@
 //Events: click on Time button filter invoices
-Template.Today.events({
+Template.today.events({
   'click button': function () {
     goURL("today");
   }});
 
-Template.Week.events({
+Template.week.events({
   'click button': function () {
     goURL("week");
   }});
 
-Template.Month.events({
+Template.month.events({
   'click button': function () {
     goURL("month");
   }});
 
-Template.All.events({
+Template.all.events({
   'click button': function () {
    goURL("all");
   }});

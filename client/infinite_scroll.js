@@ -1,4 +1,4 @@
-Template.infinitescroll.onCreated(function() {
+Template.infinite_scroll.onCreated(function() {
    this.showMoreVisible = function() {
      var target = $(".showMoreResults");
       if (!target.length) return;
@@ -9,10 +9,10 @@ Template.infinitescroll.onCreated(function() {
      };
 });
 
-Template.infinitescroll.onRendered(function() {
+Template.infinite_scroll.onRendered(function() {
   $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
 });
 
-Template.infinitescroll.onDestroyed(function() {
+Template.infinite_scroll.onDestroyed(function() {
     $(window).off('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
 });

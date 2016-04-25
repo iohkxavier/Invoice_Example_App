@@ -1,4 +1,4 @@
-Template.Invoices.onCreated(function() {
+Template.invoices_template.onCreated(function() {
   this.incrementInvoicesNumber = 30;
   this.initInvoicesNumber = 30;
   this.elementsLimit = new ReactiveVar();
@@ -14,7 +14,7 @@ Template.Invoices.onCreated(function() {
    });
 });
 
-Template.Invoices.helpers({
+Template.invoices_template.helpers({
   elementsLimit : function() {
     return Template.instance().elementsLimit.get();
   },
@@ -30,7 +30,7 @@ Template.Invoices.helpers({
   }
 });
 
-Template.Invoices.events({
+Template.invoices_template.events({
   'becameVisible .showMoreResults': function (event, template) {
       template.elementsLimit.set(template.elementsLimit.get() + template.incrementInvoicesNumber);
     }

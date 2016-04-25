@@ -1,12 +1,12 @@
-<template name="Invoices">
+<template name="invoices_template">
   <h2>Invoices</h2>
   <table>
     <tr>
-      <td>{{>bInvoiceNumber}}</td>
-      <td>{{>bTotal}}</td>
-      <td>{{>bCreatedAt}}</td>
+      <td>{{>invoice_number}}</td>
+      <td>{{>total}}</td>
+      <td>{{>created_at}}</td>
     </tr>
-    {{#infinitescroll timeDelay=200 visibility=hasMoreContent}}
+    {{#infinite_scroll timeDelay=200 isVisible=hasMoreContent}}
       {{#each invoices}}
         {{> invoice_template}}
       {{else}}
@@ -14,7 +14,7 @@
           <td>Nothing to load</td>
         </tr>
       {{/each}}
-    {{/infinitescroll}}
+    {{/infinite_scroll}}
   </table>
 </template>
 
