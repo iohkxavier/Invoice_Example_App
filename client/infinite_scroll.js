@@ -9,11 +9,16 @@ TemplateController('infinite_scroll', {
       instance.target.trigger("becameVisible");
     }
     };
+    this.showMoreVisibleDebounced = () => {
+     return (event) => {
+       _.debounce(this.showMoreVisible, this.data.timeDelay);
+     }
+   };
   },
   onRendered() {
-    $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
+    $(window).on('scroll',this.showMoreVisibleDebounced());
   },
   onDestroyed() {
-    $(window).off('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
+    $(window).off('scroll',this.showMoreVisibleDebounced());
   }
 });
