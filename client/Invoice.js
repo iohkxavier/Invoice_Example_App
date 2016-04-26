@@ -34,7 +34,7 @@ TemplateController('invoices_template', {
   'becameVisible .showMoreResults': function (event, template) {
       this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
     },
-  'enteredSearchQuery .form-group input': function (event, template, invoiceFieldsArray) {
+  'enteredSearchQuery .row input': function (event, template, invoiceFieldsArray) {
     for (var key of Object.keys(invoiceFieldsArray)) {
       if (invoiceQueryState.get(invoiceFieldsArray[key].name) !==  invoiceFieldsArray[key].value)
       {

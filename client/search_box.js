@@ -45,15 +45,15 @@ TemplateController('search_box', {
     }
   },
   events: {
-  'keyup .form-group input': function (event, template) {
+  'keyup .row input': function (event, template) {
     if(event.which === 13)
       {
         this.goSearch(event);
       }
     },
-    'change .form-control': function (event, template) {
-      var target = $(event.currentTarget);
-      this.currentSearchFieldIndex = target.find(":selected").index();
+  'change .invoice_dropdown': function (event, template) {
+    var target = $(event.currentTarget);
+    this.currentSearchFieldIndex = target.find(":selected").index();
     }
   }
 })

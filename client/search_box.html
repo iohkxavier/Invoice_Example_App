@@ -1,12 +1,14 @@
 <template name="search_box">
-  <div class="form-group">
-          <div class="col-xs-5 selectContainer">
-              <select name="invoice_field_menu" class="form-control">
-                  <option value="email">Email</option>
-                  <option value="invoice_number">Invoice Number</option>
-                  <option value="total">Total</option>
-              </select>
-          </div>
-          <input type="text" class=".search_box">
+  <div class="row">
+      <div class="col-xs-4 col-md-3">
+          <input class=".search_box form-control" />
       </div>
+      <div class="col-xs-4 col-md-3">
+        <select name="invoice_field_menu" class="form-control invoice_dropdown">
+            <option value="email">Email</option>
+            <option value="invoice_number">Invoice Number</option>
+            <option value="total">Total</option>
+        </select>
+      </div>
+    </div>
 </template>
