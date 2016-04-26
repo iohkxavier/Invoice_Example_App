@@ -1,9 +1,7 @@
 TemplateController('search_box', {
   private: {
-    currentSearchFieldIndex: 0 // email by default
-  },
-  onCreated(){
-    this.formatOK = function (fieldName, format,value) {
+    currentSearchFieldIndex: 0, // email by default
+    formatOK: function (fieldName, format,value) {
       let hasError = true;
       let errMssg = "";
       switch (format) {
@@ -30,8 +28,7 @@ TemplateController('search_box', {
       }
       return errMssg;
     },
-
-    this.goSearch =  function(event) {
+    goSearch: function(event) {
       let targetElement =  $(event.target);
       let currentField = this.data.criteria[this.currentSearchFieldIndex];
       if (!targetElement.length) return;
@@ -47,25 +44,16 @@ TemplateController('search_box', {
       }
     }
   },
-  onRendered(){
-    $(".form-group input").on( "keyup", event => {
-      if(event.which === 13)
+  events: {
+  'keyup .form-group input': function (event, template) {
+    if(event.which === 13)
       {
         this.goSearch(event);
       }
-  });
-
-  $(".form-control").on( "change", event => {
-    var target = $(event.currentTarget);
-    this.currentSearchFieldIndex = target.find(":selected").val();
-  });
-
-  },
-  onDestroyed(){
-  $(".form-group input").off( "keyup", event => {
-    //if(event.which === 13)
-      this.goSearch(event);
-  });
-  $(".form-control").off( "change", event => {});
+    },
+    'change .form-control': function (event, template) {
+      var target = $(event.currentTarget);
+      this.currentSearchFieldIndex = target.find(":selected").index();
+    }
   }
 })

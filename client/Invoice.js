@@ -8,7 +8,7 @@ TemplateController('invoices_template', {
   onCreated() {
     this.autorun(() => {
       this.subscribe('invoices',
-        invoiceQueryState.toJSON(),
+        invoiceQueryState.props(),
         this.state.elementsLimit()
       );
     });
@@ -16,7 +16,7 @@ TemplateController('invoices_template', {
   helpers: {
     invoices: () => {
       return Invoices.byTimeRange(
-        invoiceQueryState.toJSON(),
+        invoiceQueryState.props(),
         this.Template.instance().state.elementsLimit()
        )},
     hasMoreContent: () => {
@@ -24,9 +24,9 @@ TemplateController('invoices_template', {
     },
     searchFields: () => {
       return [
-                {"name":"email","value":"","format":"string"},
-                {"name":"invoiceNumber","value":"","format":"integer"},
-                {"name":"total","value":"","format":"integer"}
+                {name:"email",value:"",format:"string"},
+                {name:"invoiceNumber",value:"",format:"integer"},
+                {name:"total",value:"",format:"integer"}
              ];
     }
   },

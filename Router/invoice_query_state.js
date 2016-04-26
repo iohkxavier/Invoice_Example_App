@@ -21,7 +21,7 @@ invoiceQueryState = {
       FlowRouter.setQueryParams(queryString);
     }
   },
-  toJSON: function(){
+  props: function(){
     return {
       ["timeRange"]     : this.get("timeRange"),
       ["sortedBy"]      : this.get("sortedBy"),
