@@ -36,7 +36,7 @@ TemplateController('search_box', {
       if (!errorFormatMssg)
       {
         currentField.value = targetElement.val();
-        targetElement.trigger(this.data.eventName, [this.data.criteria]);
+        targetElement.trigger(this.data.eventName, [currentField]);
       }
       else
       {

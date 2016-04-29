@@ -10,16 +10,13 @@ invoiceQueryState = {
     }
     return queryValue;
   },
-  set: function (queryParam, queryValue) {
-    if (queryParam === "timeRange")
-    {
-      FlowRouter.setParams({queryParam: queryValue});
-    }
-    else {
-      let queryString = {};
-      queryString[queryParam] = queryValue;
-      FlowRouter.setQueryParams(queryString);
-    }
+  setFilter: function (field) {
+    let queryParam = {};
+    queryParam["sortOrder"] = FlowRouter.current().queryParams.sortOrder;
+    queryParam["sortedBy"] = FlowRouter.current().queryParams.sortedBy;
+    queryParam[field.name] = field.value;
+    let path = FlowRouter.path("/:timeRange",FlowRouter.current().params,queryParam);
+    FlowRouter.go(path);
   },
   props: function(){
     return {

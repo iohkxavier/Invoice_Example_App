@@ -32,15 +32,10 @@ TemplateController('invoices_template', {
   },
   events: {
   'becameVisible .showMoreResults': function (event, template) {
-      this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
+    this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
     },
-  'enteredSearchQuery .row input': function (event, template, invoiceFieldsArray) {
-    for (var key of Object.keys(invoiceFieldsArray)) {
-      if (invoiceQueryState.get(invoiceFieldsArray[key].name) !==  invoiceFieldsArray[key].value)
-      {
-        invoiceQueryState.set(invoiceFieldsArray[key].name, invoiceFieldsArray[key].value);
-      }
-    }
+  'enteredSearchQuery .row input': function (event, template, invoiceFieldSelected) {
+    invoiceQueryState.setFilter(invoiceFieldSelected);
   }
   }
 });
