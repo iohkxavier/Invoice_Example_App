@@ -9,10 +9,7 @@ TemplateController('infinite_scroll', {
       instance.target.trigger("becameVisible");
     }
     };
-    this.showMoreVisibleDebounced = () => {
-     return (event) => {
-       _.debounce(this.showMoreVisible, this.data.timeDelay);
-     }
+    this.showMoreVisibleDebounced = _.debounce(_.bind(this.showMoreVisible, this), this.data.timeDelay);
    };
   },
   onRendered() {

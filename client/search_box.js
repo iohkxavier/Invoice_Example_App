@@ -2,7 +2,7 @@ TemplateController('search_box', {
   private: {
     currentSearchFieldIndex: 0, // email by default
     resetSearchFilter: function () {
-      var inputElement = $(".row input");
+      let inputElement = $(".row input");
       inputElement.val("");
       inputElement.focus();
     },
