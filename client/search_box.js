@@ -1,6 +1,11 @@
 TemplateController('search_box', {
   private: {
     currentSearchFieldIndex: 0, // email by default
+    resetSearchFilter: function () {
+      var inputElement = $(".row input");
+      inputElement.val("");
+      inputElement.focus();
+    },
     formatOK: function (fieldName, format,value) {
       let hasError = true;
       let errMssg = "";
@@ -54,6 +59,7 @@ TemplateController('search_box', {
   'change .invoice_dropdown': function (event, template) {
     var target = $(event.currentTarget);
     this.currentSearchFieldIndex = target.find(":selected").index();
+    this.resetSearchFilter();
     }
   }
 })
