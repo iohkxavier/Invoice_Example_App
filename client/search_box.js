@@ -18,19 +18,13 @@ TemplateController('search_box', {
           }
           break;
         case "integer":
-          if (!isNaN(value))
-          {
-            hasError = false;
-          }
+          if (!isNaN(value))  hasError = false;
           break;
         default:
           errMssg = "incorrect format";
 
       }
-      if (hasError)
-      {
-        errMssg = "not a valid "+fieldName;
-      }
+      if (hasError) errMssg = "not a valid "+fieldName;
       return errMssg;
     },
     goSearch: function(event) {
@@ -51,10 +45,7 @@ TemplateController('search_box', {
   },
   events: {
   'keyup .row input': function (event, template) {
-    if(event.which === 13)
-      {
-        this.goSearch(event);
-      }
+    if(event.which === 13) this.goSearch(event);
     },
   'change .invoice_dropdown': function (event, template) {
     var target = $(event.currentTarget);

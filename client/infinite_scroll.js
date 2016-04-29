@@ -10,12 +10,11 @@ TemplateController('infinite_scroll', {
     }
     };
     this.showMoreVisibleDebounced = _.debounce(_.bind(this.showMoreVisible, this), this.data.timeDelay);
-   };
   },
   onRendered() {
-    $(window).on('scroll',this.showMoreVisibleDebounced());
+    $(window).on('scroll',this.showMoreVisibleDebounced);
   },
   onDestroyed() {
-    $(window).off('scroll',this.showMoreVisibleDebounced());
+    $(window).off('scroll',this.showMoreVisibleDebounced);
   }
 });
