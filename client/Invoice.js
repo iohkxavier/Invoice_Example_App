@@ -6,6 +6,7 @@ TemplateController('invoices_template', {
     incrementInvoicesNumber: 30
   },
   onCreated() {
+    invoiceQueryState.LoadDefaultIfUrlNotCorrect();
     this.autorun(() => {
       this.subscribe('invoices',
         invoiceQueryState.props(),
