@@ -3,14 +3,17 @@ invoiceQueryState = {
     let timeRangeParams = FlowRouter.current().params.timeRange;
     let sortOrderParams = FlowRouter.current().queryParams.sortOrder;
     let sortedByParams = FlowRouter.current().queryParams.sortedBy;
-    if (!timeRangeParams || !sortOrderParams || !sortedByParams)
-    {
-      let pathDef = "/:timeRange";
-      let params = {timeRange: "today"};
-      let queryParam = {sortedBy: "createdAt", sortOrder: "asc"};
-      let path = FlowRouter.path(pathDef,params,queryParam);
-      FlowRouter.go(path);
-    }
+      if (!timeRangeParams ||  !sortOrderParams || !sortedByParams)
+      {
+        let pathDef = "/:timeRange";
+        let params = {};
+        let queryParam = {};
+        params["timeRange"] = timeRangeParams || "today";
+        queryParam["sortedBy"] = sortedByParams || "createdAt";
+        queryParam["sortOrder"] = sortOrderParams || "asc";
+        let path = FlowRouter.path(pathDef,params,queryParam);
+        FlowRouter.go(path);
+      }
   },
   get: function (queryParam) {
     let queryValue;
