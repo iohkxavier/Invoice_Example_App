@@ -10,7 +10,7 @@ TemplateController('invoices_template', {
     this.autorun(() => {
       this.subscribe('invoices',
         invoiceQueryState.props(),
-        this.state.elementsLimit()
+        this.state.elementsLimit
       );
     });
   },
@@ -18,10 +18,10 @@ TemplateController('invoices_template', {
     invoices: () => {
       return Invoices.byTimeRange(
         invoiceQueryState.props(),
-        this.Template.instance().state.elementsLimit()
+        this.Template.instance().state.elementsLimit
        )},
     hasMoreContent: () => {
-      return ReactiveMethod.call('hasMoreInvoicesThan', this.Template.instance().state.elementsLimit());
+      return ReactiveMethod.call('hasMoreInvoicesThan', this.Template.instance().state.elementsLimit);
     },
     searchFields: () => {
       return [
@@ -33,7 +33,7 @@ TemplateController('invoices_template', {
   },
   events: {
   'becameVisible .showMoreResults': function (event, template) {
-    this.state.elementsLimit(this.state.elementsLimit() + this.incrementInvoicesNumber);
+    this.state.elementsLimit += this.incrementInvoicesNumber;
     },
   'enteredSearchQuery .row input': function (event, template, invoiceFieldSelected) {
     invoiceQueryState.setFilter(invoiceFieldSelected);
