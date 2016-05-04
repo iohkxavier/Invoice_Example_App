@@ -9,6 +9,7 @@ Meteor.methods({
       var generateDate = new Date(today.getFullYear(),(today.getMonth()),day);
       //unique invoice number
       invNumber = Math.floor(Math.random()*20000+1);
+      var email = "test"+(Math.floor(Math.random() * 50) + 1)+"@gmail.com";
 
       while(arr.indexOf(invNumber) !== -1)
       {
@@ -16,11 +17,11 @@ Meteor.methods({
       }
       arr[i] = invNumber;
 
-      Invoices.insert({ invoiceNumber: invNumber,total: total, createdAt:generateDate});
+      Invoices.insert({ invoiceNumber: invNumber, email: email, total: total, createdAt:generateDate});
     }
   },
 
   'hasMoreInvoicesThan':function(limit, filter){
-    return Invoices.find(getCreatedAtFilters(filter)).count() > limit;
+    return false;
   }
 });

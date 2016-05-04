@@ -1,18 +1,20 @@
-Template.infinitescroll.onCreated(function() {
-   this.showMoreVisible = function() {
-     var target = $(".showMoreResults");
-      if (!target.length) return;
-       if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight )
-       {
-        $(".showMoreResults").trigger("becameVisible");
-       }
-     };
-});
-
-Template.infinitescroll.onRendered(function() {
-  $(window).on('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
-});
-
-Template.infinitescroll.onDestroyed(function() {
-    $(window).off('scroll',_.debounce(this.showMoreVisible, this.data.timeDelay));
+TemplateController('infinite_scroll', {
+  onCreated() {
+    let instance = this;
+    this.showMoreVisible = function() {
+    instance.target = $(".showMoreResults");
+    if (!instance.target.length) return;
+    if (document.documentElement.clientHeight + $(document).scrollTop() >= document.body.offsetHeight)
+    {
+      instance.target.trigger("becameVisible");
+    }
+    };
+    this.showMoreVisibleDebounced = _.debounce(_.bind(this.showMoreVisible, this), this.data.timeDelay);
+  },
+  onRendered() {
+    $(window).on('scroll',this.showMoreVisibleDebounced);
+  },
+  onDestroyed() {
+    $(window).off('scroll',this.showMoreVisibleDebounced);
+  }
 });

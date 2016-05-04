@@ -1,10 +1,10 @@
 //Events: click on Time button filter invoices
-Template.bTotal.events({
+Template.total.events({
   'click button': function () {
     goURL("total");
   }});
 
-Template.bCreatedAt.events({
+Template.created_at.events({
   'click button': function () {
     goURL("createdAt");
   }});

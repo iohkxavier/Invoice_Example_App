@@ -1,6 +1,7 @@
-// given a url like "/week?sortTotal=asc"
 FlowRouter.route('/', {
-  triggersEnter: [function(context, redirect) {redirect('/today?sortedBy=createdAt&sortOrder=asc');}]
+  action: function(params,queryParams) {
+    FlowLayout.render('Invoices');
+  }
 });
 
 FlowRouter.route('/:timeRange', {
